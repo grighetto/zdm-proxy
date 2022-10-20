@@ -13,4 +13,5 @@ jobs:
       - name: Start docker-compose
         id: compose
         run: |
+          docker network create --driver nat --subnet=192.168.100.0/24 proxy
           docker-compose -f docker-compose-tests-windows.yml up --abort-on-container-exit --exit-code-from=nosqlbench

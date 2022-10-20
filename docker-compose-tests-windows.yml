@@ -1,14 +1,5 @@
 version: '3.8'
 
-networks:
-  proxy:
-    name: proxy
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: 192.168.100.0/24
-
 services:
   origin:
     image: cassandra:3.11.13

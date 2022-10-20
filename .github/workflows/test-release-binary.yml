@@ -1,0 +1,14 @@
+name: Test Release Binary
+
+on: workflow_dispatch
+
+jobs:
+  nosqlbench-tests:
+    name: NoSQLBench Tests (Windows)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Start docker-compose
+        id: compose
+        run: |
+          docker-compose -f docker-compose-tests-windows.yml up --abort-on-container-exit --exit-code-from=nosqlbench

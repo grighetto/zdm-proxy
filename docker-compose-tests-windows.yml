@@ -11,6 +11,7 @@ networks:
 services:
   origin:
     image: cassandra:3.11.13
+    platform: linux/amd64
     container_name: zdm_tests_origin
     restart: unless-stopped
     networks:
@@ -19,6 +20,7 @@ services:
 
   target:
     image: cassandra:3.11.13
+    platform: linux/amd64
     container_name: zdm_tests_target
     restart: unless-stopped
     networks:
@@ -43,6 +45,7 @@ services:
 
   nosqlbench:
     image: nosqlbench/nosqlbench:4.15.101
+    platform: linux/amd64
     container_name: zdm_tests_nb
     tty: true
     volumes:

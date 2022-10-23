@@ -11,7 +11,6 @@ networks:
 services:
   origin:
     image: cassandra:3.11.13
-    platform: linux
     container_name: zdm_tests_origin
     restart: unless-stopped
     networks:
@@ -20,7 +19,6 @@ services:
 
   target:
     image: cassandra:3.11.13
-    platform: linux
     container_name: zdm_tests_target
     restart: unless-stopped
     networks:
@@ -29,7 +27,6 @@ services:
 
   proxy:
     image: golang:windowsservercore-ltsc2022
-    platform: windows
     container_name: zdm_tests_proxy
     restart: unless-stopped
     tty: true
@@ -46,7 +43,6 @@ services:
 
   nosqlbench:
     image: nosqlbench/nosqlbench:4.15.101
-    platform: linux
     container_name: zdm_tests_nb
     tty: true
     volumes:

@@ -13,4 +13,11 @@ jobs:
       - name: Start docker-compose
         id: compose
         run: |
+          # Enable Experimental Features in Dockerd daemon.conf
+          $configfile = @"
+          {
+              "experimental": true
+          }
+          "@
+          $configfile | Out-File -FilePath C:\ProgramData\docker\config\daemon.json -Encoding ascii -Force
           docker-compose -f docker-compose-tests-windows.yml up --abort-on-container-exit --exit-code-from=nosqlbench

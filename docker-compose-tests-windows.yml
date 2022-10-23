@@ -29,6 +29,7 @@ services:
 
   proxy:
     image: golang:windowsservercore-ltsc2022
+    platform: windows
     container_name: zdm_tests_proxy
     restart: unless-stopped
     tty: true

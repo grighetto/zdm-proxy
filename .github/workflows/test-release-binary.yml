@@ -22,4 +22,7 @@ jobs:
           }
           "@
           $configfile | Out-File -FilePath C:\ProgramData\docker\config\daemon.json -Encoding ascii -Force
+          Stop-Service *docker*
+          Start-Service *docker*
+          docker --version
           docker-compose -f docker-compose-tests-windows.yml up --abort-on-container-exit --exit-code-from=nosqlbench

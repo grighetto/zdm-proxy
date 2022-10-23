@@ -13,6 +13,8 @@ jobs:
       - name: Start docker-compose
         id: compose
         run: |
+          # Install required Windows features
+          Install-WindowsFeature -Name Hyper-V,Containers -IncludeAllSubFeature -IncludeManagementTools
           # Set LCOW_SUPPORTED Variable to 1 for enabled
           [Environment]::SetEnvironmentVariable("LCOW_SUPPORTED", "1", "Machine")
           # Enable Experimental Features in Dockerd daemon.conf

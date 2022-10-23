@@ -36,7 +36,7 @@ services:
       - 2345:2345
       - 9042:9042
     volumes:
-      - .:/source
+      - .:C:\source
     entrypoint:
       - /source/compose/proxy-entrypoint.sh
     networks:

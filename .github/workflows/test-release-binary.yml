@@ -15,27 +15,27 @@ jobs:
         run: |
           Systeminfo.exe
           # Install required Windows features
-          Install-WindowsFeature Containers -IncludeAllSubFeature -IncludeManagementTools
-          Install-WindowsFeature Hyper-V-Powershell
+          #Install-WindowsFeature Containers -IncludeAllSubFeature -IncludeManagementTools
+          #Install-WindowsFeature Hyper-V-Powershell
           #Install-WindowsFeature -Name Hyper-V,Containers -IncludeAllSubFeature -IncludeManagementTools
-          dism /online /enable-feature /featurename:Microsoft-Hyper-V /all /NoRestart
-          dism /online /disable-feature /featurename:Microsoft-Hyper-V-Online /NoRestart
-          dism /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+          #dism /online /enable-feature /featurename:Microsoft-Hyper-V /all /NoRestart
+          #dism /online /disable-feature /featurename:Microsoft-Hyper-V-Online /NoRestart
+          #dism /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
           # Set LCOW_SUPPORTED Variable to 1 for enabled
-          [Environment]::SetEnvironmentVariable("LCOW_SUPPORTED", "1", "Machine")
+          #[Environment]::SetEnvironmentVariable("LCOW_SUPPORTED", "1", "Machine")
           # Check Docker config
-          get-content C:\ProgramData\docker\config\daemon.json
+          #get-content C:\ProgramData\docker\config\daemon.json
           # Enable Experimental Features in Dockerd daemon.conf
-          $configfile = @"
-          {
-              "experimental": true
-          }
-          "@
-          $configfile | Out-File -FilePath C:\ProgramData\docker\config\daemon.json -Encoding ascii -Force
-          Invoke-WebRequest -Uri "https://github.com/linuxkit/lcow/releases/download/v4.14.35-v0.3.9/release.zip" -UseBasicParsing -OutFile release.zip
-          Expand-Archive release.zip -DestinationPath "$Env:ProgramFiles\Linux Containers\."
+          #$configfile = @"
+          #{
+          #    "experimental": true
+          #}
+          #"@
+          #$configfile | Out-File -FilePath C:\ProgramData\docker\config\daemon.json -Encoding ascii -Force
+          #Invoke-WebRequest -Uri "https://github.com/linuxkit/lcow/releases/download/v4.14.35-v0.3.9/release.zip" -UseBasicParsing -OutFile release.zip
+          #Expand-Archive release.zip -DestinationPath "$Env:ProgramFiles\Linux Containers\."
           wsl --update
-          wsl --set-default-version 2
+          wsl --set-default-version 1
           wsl --list -o
           wsl --install -d Ubuntu
           Stop-Service *docker*

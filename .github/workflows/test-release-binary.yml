@@ -21,6 +21,8 @@ jobs:
           dism /online /disable-feature /featurename:Microsoft-Hyper-V-Online /NoRestart
           # Set LCOW_SUPPORTED Variable to 1 for enabled
           [Environment]::SetEnvironmentVariable("LCOW_SUPPORTED", "1", "Machine")
+          # Check Docker config
+          get-content C:\ProgramData\docker\config\daemon.json
           # Enable Experimental Features in Dockerd daemon.conf
           $configfile = @"
           {

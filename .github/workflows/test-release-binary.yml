@@ -14,7 +14,11 @@ jobs:
         id: compose
         run: |
           # Install required Windows features
-          Install-WindowsFeature -Name Hyper-V,Containers -IncludeAllSubFeature -IncludeManagementTools
+          Install-WindowsFeature Containers -IncludeAllSubFeature -IncludeManagementTools
+          Install-WindowsFeature Hyper-V-Powershell
+          #Install-WindowsFeature -Name Hyper-V,Containers -IncludeAllSubFeature -IncludeManagementTools
+          dism /online /enable-feature /featurename:Microsoft-Hyper-V /all /NoRestart
+          dism /online /disable-feature /featurename:Microsoft-Hyper-V-Online /NoRestart
           # Set LCOW_SUPPORTED Variable to 1 for enabled
           [Environment]::SetEnvironmentVariable("LCOW_SUPPORTED", "1", "Machine")
           # Enable Experimental Features in Dockerd daemon.conf

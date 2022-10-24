@@ -13,6 +13,7 @@ jobs:
       - name: Start docker-compose
         id: compose
         run: |
+          Systeminfo.exe
           # Install required Windows features
           Install-WindowsFeature Containers -IncludeAllSubFeature -IncludeManagementTools
           Install-WindowsFeature Hyper-V-Powershell

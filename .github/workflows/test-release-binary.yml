@@ -20,6 +20,7 @@ jobs:
           #Install-WindowsFeature -Name Hyper-V,Containers -IncludeAllSubFeature -IncludeManagementTools
           dism /online /enable-feature /featurename:Microsoft-Hyper-V /all /NoRestart
           dism /online /disable-feature /featurename:Microsoft-Hyper-V-Online /NoRestart
+          dism /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
           # Set LCOW_SUPPORTED Variable to 1 for enabled
           [Environment]::SetEnvironmentVariable("LCOW_SUPPORTED", "1", "Machine")
           # Check Docker config
@@ -34,7 +35,7 @@ jobs:
           Invoke-WebRequest -Uri "https://github.com/linuxkit/lcow/releases/download/v4.14.35-v0.3.9/release.zip" -UseBasicParsing -OutFile release.zip
           Expand-Archive release.zip -DestinationPath "$Env:ProgramFiles\Linux Containers\."
           wsl --update
-          wsl --set-default-version 1
+          wsl --set-default-version 2
           wsl --list -o
           wsl --install -d Ubuntu
           Stop-Service *docker*
